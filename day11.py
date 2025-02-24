@@ -1,5 +1,6 @@
 #from sklearn.linear_model import LinearRegression
-from chlearn import LinearRegression # 커스텀 모델 생성
+# from chlearn import LinearRegression # 커스텀 모델 생성
+from chlearn import KNeighborsRegressor
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -15,7 +16,8 @@ plt.axis([23500, 62500, 4, 9]) # asis는 x, y축에대한 사이즈 설정
 plt.show()
 
 # 선형 모델을 선택합니다.
-model = LinearRegression()
+#model = LinearRegression()
+model = KNeighborsRegressor(n_neighbors=3)
 
 # 모델을 훈련합니다.
 model.fit(X, y)
