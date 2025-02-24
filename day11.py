@@ -15,7 +15,7 @@ y = ls[["Life satisfaction"]].values
 # 데이터를 그래프로 나타냅니다.
 ls.plot(kind='scatter', grid=True, x="GDP per capita (USD)", y="Life satisfaction") # grid=True는 격자
 plt.axis([23500, 62500, 4, 9]) # asis는 x, y축에대한 사이즈 설정
-plt.show()
+#plt.show()
 
 #model = LinearRegression()
 model = KNeighborsRegressor(n_neighbors=3)
@@ -27,3 +27,7 @@ print(model.predict(X_new)) # 출력 : [[6.30165767]]
 # LinearRegression : 6.30165767
 # KNeighborsRegressor : 6.33333333 / k-초근접 이웃 k-nn (k-nearest neighbors)
 
+X_new2 = [[31721.3]]
+print(model.predict(X_new2))
+# LinearRegression : 5.89940454 -> 실제 값과 더 가까움
+# KNeighborsRegressor : 5.7
