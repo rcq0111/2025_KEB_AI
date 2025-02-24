@@ -1,16 +1,9 @@
 import numpy as np
+import pandas as pd
 
-
-#arange() : 지정된 범위 내에서 일정한 간격으로 숫자가 담긴 배열을 생성하는 함수
-
-# a = np.arange(5)
-# print(a, a.ndim, a.shape, a.size)
-
-# a = np.arange(5, 11)
-# print(a, a.ndim, a.shape, a.size)
-
-# a = np.arange(2.0, 11.8, 0.2)
-# print(a, a.ndim, a.shape, a.size)
-
-a = np.arange(2.0, 11.8, 2.0, dtype=np.int16)
-print(a, a.ndim, a.shape, a.size)
+df =pd.DataFrame(
+    {"a" : [4, 5, 6],
+          "b" : [7, 8, 9],
+          "c" : [10, 11, 12]},index = [1, 2, 3]
+)
+print(df)
