@@ -1,19 +1,29 @@
+#from statistics import LinearRegression
+from sklearn.linear_model import LinearRegression
 import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsRegressor
 
-df =pd.DataFrame(
-    [[4, 7 ,10],
-         [5, 88 ,11],
-         [16, 9 ,12]],
-         index=(1, 2, 3),
-         columns=('a', 'b', 'c')
-)
-print(df)
+# 데이터를 다운로드하고 준비합니다.
+ls = pd.read_csv("https://github.com/ageron/data/raw/main/lifesat/lifesat.csv/")
+#print(type(ls))
+#print(ls)
+X = ls[["GDP per capita (USD)"]].values
+y = ls[["Life satisfaction"]].values
+#print(y)
 
-#df3 = df.iloc[0:2]
-#df3 =df.loc[1:2]
-df3 = df.iloc[:, [0,2]]
-print(len(df3))
+# 데이터를 그래프로 나타냅니다.
+ls.plot(kind='scatter', grid=True, x="GDP per capita (USD)", y="Life satisfaction") # grid=True는 격자
+plt.axis([23500, 62500, 4, 9]) # asis는 x, y축에대한 사이즈 설정
+plt.show()
 
-# df2 = pd.melt(df).rename(columns={'variable' : 'var', 'value' : 'val'}).query('val >= 10').sort_values('val', ascending=False)
-#
-# print(df2)
+#model = LinearRegression()
+model = KNeighborsRegressor(n_neighbors=3)
+model.fit(X, y)
+
+# 키프로스에 대해 예츳을 만듭니다.
+X_new = [[37655.2]] # 2020년 키프로스 1인당 GDP
+print(model.predict(X_new)) # 출력 : [[6.30165767]]
+# LinearRegression : 6.30165767
+# KNeighborsRegressor : 6.33333333 / k-초근접 이웃 k-nn (k-nearest neighbors)
+
