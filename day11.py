@@ -1,10 +1,16 @@
 import numpy as np
 
-# zero(), ones() : 주어진 모양(shape)에 대해 모든 요소가 0 또는 1인 배열을 생성하는 함수
-ones = np.ones((3,4))
-print(ones)
-#zeros = np.zeros((3,4))
-zeros = np.zeros((3,4), dtype=np.int16)
-print(zeros)
-zeros2 = np.zeros((2,3,4))
-print(zeros2, zeros2.dtype)
+
+#arange() : 지정된 범위 내에서 일정한 간격으로 숫자가 담긴 배열을 생성하는 함수
+
+# a = np.arange(5)
+# print(a, a.ndim, a.shape, a.size)
+
+# a = np.arange(5, 11)
+# print(a, a.ndim, a.shape, a.size)
+
+# a = np.arange(2.0, 11.8, 0.2)
+# print(a, a.ndim, a.shape, a.size)
+
+a = np.arange(2.0, 11.8, 2.0, dtype=np.int16)
+print(a, a.ndim, a.shape, a.size)
