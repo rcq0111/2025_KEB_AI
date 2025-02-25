@@ -11,14 +11,8 @@ from sklearn.neighbors import KNeighborsRegressor
 titanic = sns.load_dataset('titanic')
 i = SimpleImputer(strategy='mean')
 titanic_num = titanic.select_dtypes(include=[np.number])
-
-i.fit(titanic_num)
-
-X = i.transform(titanic_num)
-print(titanic_num.columns)
-titanic2 = pd.DataFrame(X, columns=titanic_num.columns, index=titanic_num.index)
-print(titanic2.info())
-print(titanic2)
+T = i.fit_transform(titanic_num)
+titanic2 = pd.DataFrame(T, columns=titanic_num.columns, index=titanic_num.index)
 
 
 X = titanic2[['age']]  # 독립 변수 설정
