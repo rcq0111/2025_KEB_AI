@@ -13,6 +13,12 @@ df = pd.DataFrame(
     }
 )
 
+pd1 = pd.DataFrame(df)
 i = SimpleImputer(strategy='mean')
-df[['A', 'B']] = i.fit_transform(df[['A', 'B']])
-print(df)
+pd1_num = pd1.select_dtypes(include=[np.number])
+i.fit(pd1_num)
+X = i.transform(pd1_num)
+
+
+pd2 = pd.DataFrame(X)
+print(X)
