@@ -1,24 +1,49 @@
 # Assignment
-# v1.3) v1.2 파일의 결측치 값을 산술평균으로 채워 넣는 다양한 방법을 적용하시오.
 
+from sklearn.impute import SimpleImputer
 import numpy as np
 import pandas as pd
-from sklearn.impute import SimpleImputer
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsRegressor
 
-df = pd.DataFrame(
-    {
-        'A' : [1, 2, np.nan, 4],
-        'B' : [np.nan, 2, 3, 4],
-        'C' : [1, 2, 3, 4]
-    }
-)
-
-pd1 = pd.DataFrame(df)
+titanic = sns.load_dataset('titanic')
 i = SimpleImputer(strategy='mean')
-pd1_num = pd1.select_dtypes(include=[np.number])
-i.fit(pd1_num)
-X = i.transform(pd1_num)
+titanic_num = titanic.select_dtypes(include=[np.number])
+
+i.fit(titanic_num)
+
+X = i.transform(titanic_num)
+print(titanic_num.columns)
+titanic2 = pd.DataFrame(X, columns=titanic_num.columns, index=titanic_num.index)
+print(titanic2.info())
+print(titanic2)
 
 
-pd2 = pd.DataFrame(X)
-print(X)
+X = titanic2[['age']]  # 독립 변수 설정
+y = titanic2[['survived']]  # 종속 변수 설정
+
+# 훈련/검증 데이터 분할
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 모델 선택
+model = KNeighborsRegressor(n_neighbors=5)
+
+# K 최근접 이웃 회귀 모델 훈련
+model.fit(X_train, y_train)
+
+# 예측
+y_pred = model.predict(X_test)  # 검증 셋트를 인수로 예측
+
+# 시각화
+plt.figure(figsize=(5, 2))
+plt.scatter(X_test, y_test, color='blue', label='Real')
+plt.scatter(X_test, y_pred, color='red', label='Predicted')
+plt.title('KNeighborsRegressor: Real vs Predicted')
+plt.xlabel('Age')
+plt.ylabel('Survivied')
+plt.show()
+
+
+
