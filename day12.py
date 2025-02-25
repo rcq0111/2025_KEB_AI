@@ -12,4 +12,7 @@ df = pd.DataFrame(
         'C' : [1, 2, 3, 4]
     }
 )
+
+i = SimpleImputer(strategy='mean')
+df[['A', 'B']] = i.fit_transform(df[['A', 'B']])
 print(df)
