@@ -9,6 +9,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsRegressor
 
 titanic = sns.load_dataset('titanic')
+
+# median_age = titanic['age'].median()  # 나이 중앙값 산출
+# titanic_fill_row = titanic.fillna({'age' : median_age})  # 결측치 처리
+
 i = SimpleImputer(strategy='mean')
 titanic_num = titanic.select_dtypes(include=[np.number])
 T = i.fit_transform(titanic_num)
