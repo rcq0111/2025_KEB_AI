@@ -1,10 +1,21 @@
-import pandas as pd
+from pandas.core.indexes.multi import names_compat
 
-data = [1, 7, 5, 2, 8, 3, 6, 4]
 
-bins = [0, 3, 6, 9]
+class Pokemon:
+    def __init__(self, name):
+        self.name = name
+    def walk(self):
+        print("walk..")
+    def attack(self, target_Pokemon):
+        print(f"{self.name} attack!!{target_Pokemon.name}")
 
-lables = ["low", "mid", "high"]
+class Pikachu(Pokemon):
+    pass
 
-cat = pd.cut(data, bins, False, lables) # right는 0, 3, 6, 9 포함 미포함
-print(cat)
+class Agumon:
+    def __init__(self, name):
+        self.name = name
+
+agumon = Agumon('아구몬')
+pikachu = Pikachu('피카츄')
+pikachu.attack(agumon)
